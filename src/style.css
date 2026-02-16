@@ -1,5 +1,14 @@
 @import "tailwindcss";
 
 .close {
-  @apply cursor-pointer transition-transform duration-200 hover:scale-110 active:scale-90;
+  cursor: pointer;
+  transition: transform 0.2s; /* duration-200 = 200ms */
+}
+
+.close:hover {
+  transform: scale(1.1); /* scale-110 = 110% */
+}
+
+.close:active {
+  transform: scale(0.9); /* scale-90 = 90% */
 }
