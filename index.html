@@ -14,7 +14,7 @@
       <button
         x-show="!open"
         @click="open = true"
-        class="fixed top-4 right-4 bg-gray-900 text-white p-3 rounded-full shadow-lg"
+        class="fixed top-4 right-4 bg-gray-900 text-white p-3 rounded close"
       >
         ☰
       </button>
@@ -28,13 +28,15 @@
         x-transition:leave="transition transform duration-300"
         x-transition:leave-start="translate-x-0 opacity-100"
         x-transition:leave-end="translate-x-full opacity-0"
+        @click.away="open = false"
         class="fixed top-0 right-0 h-full w-64 flex flex-col"
       >
         <!-- Bovenste deel: volledig ondoorzichtig -->
-        <div class="bg-gray-900 p-4 flex justify-end">
+        <div class="bg-gray-900 p-4 flex justify-between items-center">
+          <div class="text-white">Milan Martens</div>
           <button
             @click="open = false"
-            class="bg-gray-700 px-3 py-2 rounded text-white"
+            class="px-3 py-2 text-white close"
           >
             ✕
           </button>
@@ -43,11 +45,26 @@
         <!-- Rest van het menu: deels doorzichtig -->
         <div class="flex-1 bg-gray-900/70 p-4 flex flex-col justify-start">
           <ul class="space-y-4 text-white">
-            <li><a href="#" class="hover:text-blue-400">Home</a></li>
-            <li><a href="#About" class="hover:text-blue-400">Over</a></li>
-            <li>
-              <a href="#Projects" class="hover:text-blue-400">Projects</a>
-            </li>
+            <a href="#">
+              <li
+                class="hover:bg-black active:bg-gray-800 p-4 rounded hover:cursor-pointer"
+              >
+                Home
+              </li></a
+            >
+            <a href="#About">
+              <li
+                class="hover:bg-black active:bg-gray-800 p-4 rounded hover:cursor-pointer"
+              >
+                Over
+              </li></a
+            ><a href="#Projects">
+              <li
+                class="hover:bg-black active:bg-gray-800 p-4 rounded hover:cursor-pointer"
+              >
+                Projects
+              </li></a
+            >
           </ul>
         </div>
       </nav>
@@ -71,19 +88,37 @@
           About Milan
         </div>
       </div>
+      <svg
+        class="absolute left-0 top-0 w-full h-full pointer-events-none z-0"
+        viewBox="0 0 1200 600"
+        preserveAspectRatio="none"
+        style="transform: translateY(600px); transform-origin: center top"
+      >
+        <!-- Gekromde lijn -->
+        <path
+          d="M500 10 C300 250, 180 250, 120 150"
+          stroke="#f71302"
+          stroke-width="4"
+          fill="transparent"
+        />
+
+        <!-- Bolletje op het einde van de kromme -->
+        <circle cx="500" cy="10" r="8" fill="#f71302" />
+      </svg>
+
       <!-- DOZEN -->
       <div
         x-data="{
         <!-- TODO ZET DE JUISTE TEKST IN CONTENT -->
         boxes: [
-          { title: 'Doos 1', content: 'Content 1' },
-          { title: 'Doos 2', content: 'Content 2' },
-          { title: 'Doos 3', content: 'Content 3' },
-          { title: 'Doos 4', content: 'Content 4' },
-          { title: 'Doos 5', content: 'Content 5' },
-          { title: 'Doos 6', content: 'Content 6' },
-          { title: 'Doos 7', content: 'Content 7' },
-          { title: 'Doos 8', content: 'Content 8' }
+          { title: 'Doos 1', content: 'Content 1', description: 'Description 1' },
+          { title: 'Doos 2', content: 'Content 2', description: 'Description 2'  },
+          { title: 'Doos 3', content: 'Content 3', description: 'Description 3'  },
+          { title: 'Doos 4', content: 'Content 4', description: 'Description 4'  },
+          { title: 'Doos 5', content: 'Content 5', description: 'Description 5'  },
+          { title: 'Doos 6', content: 'Content 6', description: 'Description 6'  },
+          { title: 'Doos 7', content: 'Content 7', description: 'Description 7'  },
+          { title: 'Doos 8', content: 'Content 8', description: 'Description 8'  }
         ],
         getRows() {
           const rowSize = 3
@@ -107,7 +142,7 @@
         >
           <path
             d="M220 50 C 200 150, 400 -50, 600 50 S 1000 150, 1200 -50"
-            stroke="#9ca3af"
+            stroke="#f71302"
             stroke-width="4"
             fill="transparent"
           />
@@ -119,7 +154,7 @@
         >
           <path
             d="M1000 50 L1000 300"
-            stroke="#9ca3af"
+            stroke="#f71302"
             stroke-width="4"
             fill="transparent"
           />
@@ -132,7 +167,7 @@
         >
           <path
             d="M20 50 C 200 150, 400 -50, 600 50 S 1000 150, 1200 -450"
-            stroke="#9ca3af"
+            stroke="#f71302"
             stroke-width="4"
             fill="transparent"
           />
@@ -144,7 +179,7 @@
         >
           <path
             d="M220 300 L220 500"
-            stroke="#9ca3af"
+            stroke="#f71302"
             stroke-width="4"
             fill="transparent"
           />
@@ -160,7 +195,7 @@
         >
           <path
             d="M220 50 C 200 150, 400 -50, 600 50 S 1000 150, 1200 -50"
-            stroke="#9ca3af"
+            stroke="#f71302"
             stroke-width="4"
             fill="transparent"
           />
@@ -171,13 +206,67 @@
           <template x-for="row in getRows()" :key="row[0].title">
             <div class="flex gap-12 justify-between">
               <template x-for="box in row" :key="box.title">
+                <!-- BEGIN MODAL -->
                 <div
-                  class="w-[25vw] h-[40vh] border bg-white transform transition-transform duration-300 hover:scale-105 flex flex-col"
+                  x-data="{ modelOpen: false }"
+                  // zorg dat er niet gescorled kan worden 
+                  x-effect="document.body.style.overflow = modelOpen ? 'hidden' : 'auto'"
+                  :class="modelOpen   
+                  ? 'w-[25vw] h-[40vh] border bg-white flex flex-col relative' 
+                  : 'w-[25vw] h-[40vh] border bg-white flex flex-col relative transform transition-transform duration-300 hover:scale-105'"
                 >
+                  <!-- Titel -->
                   <div
                     class="text-center mt-4 font-bold"
                     x-text="box.title"
                   ></div>
+
+                  <!-- Knop -->
+                  <div class="absolute right-4 top-4">
+                    <button
+                      @click="modelOpen = true"
+                      class="bg-blue-600 text-white px-3 py-1 rounded close"
+                    >
+                      Open
+                    </button>
+                  </div>
+
+                  <!-- Modal -->
+                  <div
+                    x-show="modelOpen"
+                    x-transition
+                    class="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+                  >
+                    <div
+                      @click.outside="modelOpen = false"
+                      class="bg-gray-900 text-white p-6 rounded-lg w-96"
+                    >
+                      <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-lg font-bold" x-text="box.title"></h2>
+                        <button 
+                            @click="modelOpen = false" 
+                            class="close"
+                          >
+                            ✕
+                          </button>
+
+                      </div>
+
+                      <p x-text="box.description"></p>
+
+                      <div class="mt-4 text-right">
+                        <button
+                          @click="modelOpen = false"
+                          class="bg-gray-700 px-4 py-2 rounded active:bg-gray-800 hover:cursor-pointer"
+                        >
+                          Sluiten
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                <!-- EINDE MODAL -->
+
+                  <!-- Content -->
                   <div class="mt-4 ml-4" x-text="box.content"></div>
                 </div>
               </template>
@@ -189,14 +278,25 @@
 
     <!-- PROJECTS -->
     <!-- !BAZEER DEZE OP BASIS VAN JAAR -->
-    <div class="h-screen bg-red-600">
+    <div class="h-fit bg-red-600 pb-16">
       <div class="flex justify-center">
         <div class="text-4xl font-bold text-white mt-8" id="Projects">
           Projects
         </div>
       </div>
-      <div class="ml-16">
-        <div>iefiefije</div>
+      <div class="mx-16 mt-16">
+        <div class="w-full h-[30vw] grid grid-cols-3 mb-8 gap-4">
+          <div class="h-full border border-blue-500">FOTO PROJECT</div>
+          <div class="h-full border border-blue-500 col-span-2">
+            BESCHRIJVING PROJECT
+          </div>
+        </div>
+        <div class="w-full h-[30vw] grid grid-cols-3 mb-8 gap-4">
+          <div class="h-full border border-blue-500 col-span-2">
+            BESCHRIJVING PROJECT
+          </div>
+          <div class="h-full border border-blue-500">FOTO PROJECT</div>
+        </div>
       </div>
     </div>
 
