@@ -1,0 +1,16 @@
+Jaar 1:
+    Sem 1:
+    Sem 2:
+        Skill 1 (geleidt), Pokémon essentials helpt leerlingen bij het studeren, een soort bingel clone = https://github.com/MilanMartens/Pok-mon-Game
+        website gemaakt voor cover band Gaz-Planché = https://gazplanche.netlify.app/ 
+        IoT essentials, Chicken Hockey = https://github.com/MilanMartens/IOT-CHICKEN-HOCKEY
+        Full stack, Terra Primordia = https://terra-primordia.netlify.app/ Database op vercel, maar data is leeg = https://terraprimordia.vercel.app/
+Jaar 2:
+    Sem 1:
+        webdev, TALL project RugbyPulse = https://rugbypulse.rugbypulse.be/
+        Skill 2 (geleidt), project Requirement Analysis & Data modeling => geef docs.
+        Digital Startup, Hackaton in Antwerpen = https://www.linkedin.com/posts/milan1-martens_thomasmore-itfactory-hackthefuture-activity-7394441115581444096-cOIH?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFOIAMQBORy8PZDPHAvkDva4y3pxVyWPp5M
+        Data science, Analysis van de Giro d'italia en Giro Donne over de jaren heen = https://github.com/MilanMartens/Datascience-Project 
+    Sem 2:
+        Skill 2, TALL project Feest op tafel = 
+        
