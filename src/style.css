@@ -1,4 +1,15 @@
 @import "tailwindcss";
+:root {
+  --beige: #fef4e4;
+  --bruin: #5e2a1b;
+  --oranje: #f15313;
+  --lichtGroen: #41d3b9;
+  --donkerderGroen: #036f7c;
+  --bruin: #6c321d;
+  --grijs: #c4bda7;
+  --donkerBruin: #4e2620;
+  --donkerBlauw: #224953;
+}
 
 .close {
   @apply cursor-pointer transition-transform duration-200 hover:scale-110 active:scale-90;
