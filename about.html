@@ -1,0 +1,219 @@
+<!-- ABOUT SECTION -->
+<div class="h-fit bg-yellow-300 pb-16">
+  <div class="flex justify-center">
+    <div
+      class="text-3xl sm:text-4xl font-bold text-white mt-8 px-4 text-center"
+      id="About"
+    >
+      About Milan
+    </div>
+  </div>
+
+  <!-- DOZEN -->
+  <div
+    x-data="{
+          boxes: [
+            { title: 'Doos 1', content: 'Content 1', description: 'Description 1' },
+            { title: 'Doos 2', content: 'Content 2', description: 'Description 2' },
+            { title: 'Doos 3', content: 'Content 3', description: 'Description 3' },
+            { title: 'Doos 4', content: 'Content 4', description: 'Description 4' },
+            { title: 'Doos 5', content: 'Content 5', description: 'Description 5' },
+            { title: 'Doos 6', content: 'Content 6', description: 'Description 6' },
+            { title: 'Doos 7', content: 'Content 7', description: 'Description 7' },
+            { title: 'Doos 8', content: 'Content 8', description: 'Description 8' }
+          ],
+          getRows() {
+            const rowSize = 3;
+            const rows = [];
+            for (let i = 0; i < this.boxes.length; i += rowSize) {
+              let slice = this.boxes.slice(i, i + rowSize);
+              if ((rows.length + 1) % 2 === 0) slice = slice.reverse();
+              rows.push(slice);
+            }
+            return rows;
+          }
+        }"
+    class="relative mt-12 sm:mt-24 w-full flex flex-col gap-6 sm:gap-12 px-4"
+  >
+    <!-- Achtergrond SVG's: enkel zichtbaar op desktop -->
+    <svg
+      class="hidden md:block absolute top-0 left-0 w-full h-full pointer-events-none z-0"
+      style="top: 5px"
+      viewBox="0 0 1200 600"
+      preserveAspectRatio="none"
+    >
+      <path
+        d="M220 50 C 200 150, 400 -50, 600 50 S 1000 150, 1200 -50"
+        stroke="#f71302"
+        stroke-width="4"
+        fill="transparent"
+      />
+    </svg>
+    <svg
+      class="hidden md:block absolute left-0 top-0 w-full h-full pointer-events-none z-0"
+      viewBox="0 0 1200 600"
+      preserveAspectRatio="none"
+    >
+      <path
+        d="M1000 50 L1000 300"
+        stroke="#f71302"
+        stroke-width="4"
+        fill="transparent"
+      />
+    </svg>
+    <svg
+      class="hidden md:block absolute left-0 w-full h-full pointer-events-none z-0"
+      style="transform: RotateX(-1); top: 350px"
+      viewBox="0 0 1200 600"
+      preserveAspectRatio="none"
+    >
+      <path
+        d="M20 50 C 200 150, 400 -50, 600 50 S 1000 150, 1200 -450"
+        stroke="#f71302"
+        stroke-width="4"
+        fill="transparent"
+      />
+    </svg>
+    <svg
+      class="hidden md:block absolute left-0 top-0 w-full h-full pointer-events-none z-0"
+      viewBox="0 0 1200 600"
+      preserveAspectRatio="none"
+    >
+      <path
+        d="M220 300 L220 500"
+        stroke="#f71302"
+        stroke-width="4"
+        fill="transparent"
+      />
+    </svg>
+    <svg
+      class="hidden md:block absolute top-0 left-0 w-full h-full pointer-events-none z-0"
+      style="
+        transform: translateY(850px) rotateX(180deg);
+        transform-origin: center top;
+      "
+      viewBox="0 0 1200 600"
+      preserveAspectRatio="none"
+    >
+      <path
+        d="M220 50 C 200 150, 400 -50, 600 50 S 1000 150, 1200 -50"
+        stroke="#f71302"
+        stroke-width="4"
+        fill="transparent"
+      />
+    </svg>
+
+    <!-- MOBILE: grid van 2 kolommen, DESKTOP: rijen van 3 met zigzag -->
+    <div class="relative z-10">
+      <!-- Mobile layout: 2-koloms grid -->
+      <div class="grid grid-cols-2 gap-4 md:hidden">
+        <template x-for="box in boxes" :key="box.title">
+          <div
+            x-data="{ modelOpen: false }"
+            x-effect="document.body.style.overflow = modelOpen ? 'hidden' : 'auto'"
+            class="border bg-white flex flex-col relative transform transition-transform duration-300 hover:scale-105 min-h-[160px]"
+          >
+            <!-- Titel -->
+            <div
+              class="text-center mt-3 font-bold text-sm px-2"
+              x-text="box.title"
+            ></div>
+
+            <!-- Knop -->
+            <div class="absolute right-2 top-2">
+              <button
+                @click="modelOpen = true"
+                class="bg-blue-600 text-white px-2 py-1 rounded close text-xs"
+              >
+                Open
+              </button>
+            </div>
+
+            <!-- Modal -->
+            <div
+              x-show="modelOpen"
+              class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4"
+            >
+              <div
+                @click.outside="modelOpen = false"
+                class="bg-gray-900 text-white p-6 rounded-lg w-[90vw] h-[90vh]"
+              >
+                <div class="flex justify-between items-center mb-4">
+                  <h2 class="text-lg font-bold" x-text="box.title"></h2>
+                  <button @click="modelOpen = false" class="close text-xl">
+                    ✕
+                  </button>
+                </div>
+                <p x-text="box.description"></p>
+              </div>
+            </div>
+
+            <!-- Content -->
+            <div class="mt-3 ml-3 text-sm" x-text="box.content"></div>
+          </div>
+        </template>
+      </div>
+
+      <!-- Desktop layout: rijen van 3 met zigzag -->
+      <div class="hidden md:flex flex-col gap-12">
+        <template x-for="row in getRows()" :key="row[0].title">
+          <div class="flex gap-12 justify-between">
+            <template x-for="box in row" :key="box.title">
+              <div
+                x-data="{ modelOpen: false }"
+                x-effect="document.body.style.overflow = modelOpen ? 'hidden' : 'auto'"
+                :class="modelOpen
+                      ? 'w-[25vw] h-[40vh] border bg-white flex flex-col relative'
+                      : 'w-[25vw] h-[40vh] border bg-white flex flex-col relative transform transition-transform duration-300 hover:scale-105'"
+              >
+                <!-- Titel -->
+                <div
+                  class="text-center mt-4 font-bold"
+                  x-text="box.title"
+                ></div>
+
+                <!-- Knop -->
+                <div class="absolute right-4 top-4">
+                  <button
+                    @click="modelOpen = true"
+                    class="bg-blue-600 text-white px-3 py-1 rounded close"
+                  >
+                    Open
+                  </button>
+                </div>
+
+                <!-- Modal -->
+                <div
+                  x-show="modelOpen"
+                  class="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+                >
+                  <div
+                    @click.outside="modelOpen = false"
+                    class="bg-gray-900 text-white p-6 rounded-lg w-[90vw] h-[90vh] flex flex-col"
+                  >
+                    <!-- Header -->
+                    <div class="flex justify-between items-center mb-4">
+                      <h2 class="text-lg font-bold" x-text="box.title"></h2>
+                      <button @click="modelOpen = false" class="close">
+                        ✕
+                      </button>
+                    </div>
+
+                    <!-- Content -->
+                    <p
+                      x-text="box.description"
+                      class="flex-1 overflow-auto"
+                    ></p>
+                  </div>
+                </div>
+
+                <!-- Content -->
+                <div class="mt-4 ml-4" x-text="box.content"></div>
+              </div>
+            </template>
+          </div>
+        </template>
+      </div>
+    </div>
+  </div>
+</div>

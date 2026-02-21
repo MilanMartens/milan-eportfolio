@@ -10,6 +10,9 @@
   --donkerBruin: #4e2620;
   --donkerBlauw: #224953;
 }
+body {
+  overflow-x: hidden;
+}
 
 .close {
   @apply cursor-pointer transition-transform duration-200 hover:scale-110 active:scale-90;
