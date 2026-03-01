@@ -1,6 +1,6 @@
-/* ══════════════════════════════════
+/* ###################################
    NAVIGATIE
-══════════════════════════════════ */
+################################### */
 const toggle = document.getElementById("navToggle");
 const panel = document.getElementById("navPanel");
 const closeBtn = document.getElementById("navClose");
@@ -35,9 +35,9 @@ panel.querySelectorAll(".nav-link").forEach((link) => {
   });
 });
 
-/* ══════════════════════════════════
+/* ###################################
    GSAP — HORIZONTALE ABOUT SLIDER
-══════════════════════════════════ */
+################################### */
 gsap.registerPlugin(ScrollTrigger);
 
 const slider = document.getElementById("aboutSlider");
@@ -49,14 +49,14 @@ let isAnimating = false;
 // Bijhouden welke slides al geanimeerd zijn
 const animated = new Set();
 
-/* ── Update dots ── */
+/* ### Update dots ### */
 function updateDots(index) {
   document.querySelectorAll(".slide-dot").forEach((dot) => {
     dot.classList.toggle("active", parseInt(dot.dataset.slide) === index);
   });
 }
 
-/* ── Eenmalig de inhoud van een slide animeren ── */
+/* ### Eenmalig de inhoud van een slide animeren ### */
 function animateSlideIn(slideEl, index) {
   if (animated.has(index)) return; // al geanimeerd → niets doen
   animated.add(index);
@@ -75,7 +75,7 @@ function animateSlideIn(slideEl, index) {
   );
 }
 
-/* ── Naar een slide navigeren ── */
+/* ### Naar een slide navigeren ### */
 function goToSlide(index) {
   if (isAnimating) return;
   index = Math.max(0, Math.min(index, totalSlides - 1));
@@ -96,10 +96,10 @@ function goToSlide(index) {
   });
 }
 
-/* ── Slide 0 animeren bij load ── */
+/* ### Slide 0 animeren bij load ### */
 gsap.delayedCall(0.2, () => animateSlideIn(slides[0], 0));
 
-/* ── Knoppen ── */
+/* ### Knoppen ### */
 document
   .querySelectorAll(".slide-next")
   .forEach((btn) =>
@@ -120,7 +120,7 @@ document
     dot.addEventListener("click", () => goToSlide(parseInt(dot.dataset.slide))),
   );
 
-/* ── Swipe ── */
+/* ### Swipe ### */
 let touchStartX = 0;
 slider.addEventListener(
   "touchstart",
@@ -134,22 +134,22 @@ slider.addEventListener("touchend", (e) => {
   if (Math.abs(delta) > 60) goToSlide(currentSlide + (delta > 0 ? 1 : -1));
 });
 
-/* ── Pijltjestoetsen ── */
+/* ### Pijltjestoetsen ### */
 document.addEventListener("keydown", (e) => {
   if (e.key === "ArrowRight") goToSlide(currentSlide + 1);
   if (e.key === "ArrowLeft") goToSlide(currentSlide - 1);
 });
 
-/* ── Resize ── */
+/* ### Resize ### */
 window.addEventListener("resize", () => {
   gsap.set(slider, { x: -(currentSlide * window.innerWidth) });
 });
 
-/* ══════════════════════════════════
+/* ###################################
    GSAP — PAGINA ANIMATIES
-══════════════════════════════════ */
+################################### */
 
-/* ── Hero ── */
+/* ### Hero ### */
 gsap.from(
   [
     ".hero-logo",
@@ -167,7 +167,7 @@ gsap.from(
   },
 );
 
-/* ── Project cards bij scrollen ── */
+/* ### Project cards bij scrollen ### */
 gsap.utils.toArray(".project-card").forEach((card) => {
   gsap.from(card, {
     opacity: 0,
