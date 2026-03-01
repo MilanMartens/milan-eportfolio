@@ -1,228 +1,692 @@
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang="nl" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./src/style.css" />
     <title>E-portfolio Milan Martens</title>
+
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <!-- Eigen stijlen -->
+    <link rel="stylesheet" href="/src/style.css" />
   </head>
-  <body class="overflow-x-hidden">
-    <!-- NAV BAR -->
-    <div x-data="{ open: false }" class="fixed top-0 right-0 h-full z-50">
-      <!-- Icoontje als menu dicht is -->
-      <button
-        x-show="!open"
-        @click="open = true"
-        class="fixed top-4 right-4 bg-gray-900 text-white p-3 rounded close"
-      >
-        ☰
-      </button>
+  <body>
+    <!-- ══════════════════════════════════
+       NAVIGATIE
+  ══════════════════════════════════ -->
+    <button class="nav-toggle" id="navToggle" aria-label="Menu openen">
+      ☰
+    </button>
 
-      <!-- NAV BAR -->
-      <nav
-        x-show="open"
-        x-transition:enter="transition transform duration-300"
-        x-transition:enter-start="translate-x-full opacity-0"
-        x-transition:enter-end="translate-x-0 opacity-100"
-        x-transition:leave="transition transform duration-300"
-        x-transition:leave-start="translate-x-0 opacity-100"
-        x-transition:leave-end="translate-x-full opacity-0"
-        @click.away="open = false"
-        class="fixed top-0 right-0 h-full w-64 flex flex-col"
-      >
-        <!-- Bovenste deel: volledig ondoorzichtig -->
-        <div class="bg-gray-900 p-4 flex justify-between items-center">
-          <div class="text-white">Milan Martens</div>
-          <button @click="open = false" class="px-3 py-2 text-white close">
-            ✕
-          </button>
+    <nav class="nav-panel" id="navPanel" aria-label="Hoofdnavigatie">
+      <div class="nav-header">
+        <div class="flex items-center gap-2">
+          <img src="/public/logo/logo.svg" alt="Logo" class="nav-logo" />
+          <span>Milan Martens</span>
         </div>
+        <button class="nav-close" id="navClose" aria-label="Menu sluiten">
+          ✕
+        </button>
+      </div>
+      <div class="nav-body">
+        <a href="#hero" class="nav-link">Home</a>
+        <a href="#about" class="nav-link">Over</a>
+        <a href="#projects" class="nav-link">Projecten</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </div>
+    </nav>
 
-        <!-- Rest van het menu: deels doorzichtig -->
-        <div class="flex-1 bg-gray-900/70 p-4 flex flex-col justify-start">
-          <ul class="space-y-4 text-white">
-            <a href="#">
-              <li
-                class="hover:bg-black active:bg-gray-800 p-4 rounded hover:cursor-pointer"
-              >
-                Home
-              </li>
-            </a>
-            <a href="#About">
-              <li
-                class="hover:bg-black active:bg-gray-800 p-4 rounded hover:cursor-pointer"
-              >
-                Over
-              </li>
-            </a>
-            <a href="#Projects">
-              <li
-                class="hover:bg-black active:bg-gray-800 p-4 rounded hover:cursor-pointer"
-              >
-                Projects
-              </li>
-            </a>
-          </ul>
-        </div>
-      </nav>
-    </div>
-
-    <!-- HERO PAGE -->
-    <div
-      class="flex-1 flex justify-center items-center transition-all h-[80vh] duration-300 bg-pink-700 bg-cover bg-center bg-no-repeat"
-    >
-      <div class="text-white text-center px-4">
-        <div
-          class="flex items-center text-3xl sm:text-4xl md:text-5xl font-bold"
+    <!-- ══════════════════════════════════
+       HERO
+  ══════════════════════════════════ -->
+    <section class="hero-section" id="hero">
+      <div class="relative z-10 text-center px-6">
+        <p
+          class="font-display text-xs font-bold tracking-widest uppercase mb-6 text-licht-groen"
         >
-          <img src="public/logo/logo.svg" alt="Logo" class="w-28 h-28" />
-          <span>
-            Milan Martens <br />
-            <span
-              class="block font-medium text-lg sm:text-xl md:text-2xl text-left"
-            >
-              Competitieve Kookabura
-            </span>
-          </span>
-        </div>
-      </div>
-    </div>
+          ePortfolio
+        </p>
 
-    <!-- ABOUT -->
-    <div
-      class="horizontal-slider flex flex-nowrap h-screen w-screen border overflow-x-hidden"
-    >
-      <div
-        class="doos min-w-full h-full bg-red-400 flex items-center justify-center text-4xl"
-      >
-        1
-      </div>
-      <div
-        class="doos min-w-full h-full bg-green-400 flex items-center justify-center text-4xl"
-      >
-        2
-      </div>
-      <div
-        class="doos min-w-full h-full bg-blue-400 flex items-center justify-center text-4xl"
-      >
-        3
-      </div>
-    </div>
-
-    <!-- PROJECTS -->
-    <div class="h-fit bg-red-600 pb-16">
-      <div class="flex justify-center">
-        <div
-          class="text-3xl sm:text-4xl font-bold text-white mt-8 px-4 text-center"
-          id="Projects"
-        >
-          Projects
-        </div>
-      </div>
-
-      <div
-        class="mx-4 sm:mx-8 md:mx-16 mt-8 sm:mt-16 flex flex-col gap-6 sm:gap-8"
-      >
-        <!-- Project 1: afbeelding links -->
-        <div class="w-full grid grid-cols-1 sm:grid-cols-3 gap-4 sm:h-[30vw]">
-          <div
-            class="h-48 sm:h-full border border-blue-500 overflow-hidden flex items-center justify-center"
-          >
-            <img
-              src="https://picsum.photos/600/610"
-              class="max-w-full max-h-full object-contain"
-              alt=""
-            />
-          </div>
-          <div
-            class="min-h-30 sm:h-full border border-blue-500 sm:col-span-2 p-4 text-white"
-          >
-            BESCHRIJVING PROJECT
-          </div>
+        <div class="hero-logo-wrap">
+          <img
+            src="public/logo/logo.svg"
+            alt="Kookaburra logo"
+            class="hero-logo"
+          />
         </div>
 
-        <!-- Project 2: beschrijving links -->
-        <div class="w-full grid grid-cols-1 sm:grid-cols-3 gap-4 sm:h-[30vw]">
-          <!-- Op mobile: afbeelding boven beschrijving, op desktop: beschrijving links -->
-          <div
-            class="h-48 sm:h-full border border-blue-500 overflow-hidden flex items-center justify-center order-first sm:order-last"
+        <h1 class="hero-name mb-3">Milan Martens</h1>
+        <p class="hero-sub">Competitieve Kookabura</p>
+        <div class="flex justify-center gap-3 mt-8">
+          <a href="#about" class="btn-primary">Over mij</a>
+          <a href="#projects" class="btn-outline btn-outline-hero"
+            >Bekijk projecten</a
           >
-            <img
-              src="https://picsum.photos/600/610"
-              class="max-w-full max-h-full object-contain"
-              alt=""
-            />
-          </div>
-          <div
-            class="min-h-30 sm:h-full border border-blue-500 sm:col-span-2 p-4 text-white order-last sm:order-first"
-          >
-            BESCHRIJVING PROJECT
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════
+       ABOUT — horizontale slider
+  ══════════════════════════════════ -->
+    <section id="about" class="about-slider-section">
+      <div class="about-slider" id="aboutSlider">
+        <!-- ── SLIDE 1: Introductie ── -->
+        <div class="about-slide slide-intro">
+          <div class="blob blob-oranje"></div>
+          <div class="blob blob-groen"></div>
+
+          <div class="slide-inner">
+            <div class="slide-label gsap-fade">
+              <span class="label-line"></span>
+              <span
+                class="font-display text-xs font-bold tracking-widest uppercase text-oranje"
+                >01 — Introductie</span
+              >
+            </div>
+
+            <div class="intro-grid">
+              <div class="photo-frame gsap-fade">
+                <img
+                  src="https://picsum.photos/80/520"
+                  alt="Profielfoto Milan Martens"
+                />
+                <div class="avail-badge">
+                  <span class="avail-dot"></span>
+                  <span
+                    class="font-display text-xs font-bold tracking-wide text-donker-groen"
+                    >Beschikbaar voor opdrachten</span
+                  >
+                </div>
+              </div>
+
+              <div class="intro-text">
+                <h2
+                  class="font-display font-extrabold about-title text-donker-bruin mb-2 gsap-fade"
+                >
+                  Hallo, ik ben<br />
+                  <span class="font-serif font-normal italic text-oranje"
+                    >Milan Martens.</span
+                  >
+                </h2>
+                <p
+                  class="font-display font-semibold text-base mb-6 text-donker-groen gsap-fade"
+                >
+                  Student IT &amp; Software — Thomas More
+                </p>
+                <div
+                  class="space-y-4 mb-8 leading-relaxed text-muted max-w-prose gsap-fade"
+                >
+                  <p>
+                    Ik ben een gepassioneerde student met een sterke interesse
+                    in
+                    <strong class="text-donker-bruin font-semibold"
+                      >front-end ontwikkeling</strong
+                    >
+                    en
+                    <strong class="text-donker-bruin font-semibold"
+                      >creatieve technologie</strong
+                    >. Ik combineer technische kennis met een oog voor design.
+                  </p>
+                  <p>
+                    Ik werk graag in teamverband, maar geniet ook van
+                    uitdagingen die ik
+                    <span class="text-donker-bruin font-medium"
+                      >zelfstandig kan oplossen</span
+                    >. Altijd op zoek naar nieuwe manieren om dingen beter en
+                    slimmer te bouwen.
+                  </p>
+                </div>
+                <div class="flex flex-wrap gap-4 gsap-fade">
+                  <a href="#contact" class="btn-primary">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <path
+                        d="M3 8h10M9 4l4 4-4 4"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                    Contact opnemen
+                  </a>
+                  <a href="#projects" class="btn-outline btn-projects"
+                    >Mijn projecten</a
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div class="slide-nav">
+              <div class="slide-dots">
+                <button
+                  class="slide-dot active"
+                  data-slide="0"
+                  aria-label="Slide 1"
+                ></button>
+                <button
+                  class="slide-dot"
+                  data-slide="1"
+                  aria-label="Slide 2"
+                ></button>
+                <button
+                  class="slide-dot"
+                  data-slide="2"
+                  aria-label="Slide 3"
+                ></button>
+              </div>
+              <button class="slide-next" data-target="1">
+                Vaardigheden
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path
+                    d="M3 8h10M9 4l4 4-4 4"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
 
-        <!-- Project 3: afbeelding links -->
-        <div class="w-full grid grid-cols-1 sm:grid-cols-3 gap-4 sm:h-[30vw]">
-          <div
-            class="h-48 sm:h-full border border-blue-500 overflow-hidden flex items-center justify-center"
-          >
-            <img
-              src="https://picsum.photos/600/610"
-              class="max-w-full max-h-full object-contain"
-              alt=""
-            />
+        <!-- ── SLIDE 2: Vaardigheden & Opleiding ── -->
+        <div class="about-slide slide-skills">
+          <div class="blob blob-groen"></div>
+          <div class="blob blob-grijs"></div>
+
+          <div class="slide-inner">
+            <div class="slide-label gsap-fade">
+              <span class="label-line"></span>
+              <span
+                class="font-display text-xs font-bold tracking-widest uppercase text-oranje"
+                >02 — Vaardigheden &amp; Opleiding</span
+              >
+            </div>
+
+            <div class="stats-grid gsap-fade">
+              <div class="stat-card text-center">
+                <div class="stat-num">2+</div>
+                <p
+                  class="mt-2 text-xs uppercase tracking-widest font-bold font-display text-muted"
+                >
+                  Jaar ervaring
+                </p>
+              </div>
+              <div class="stat-card text-center">
+                <div class="stat-num">10+</div>
+                <p
+                  class="mt-2 text-xs uppercase tracking-widest font-bold font-display text-muted"
+                >
+                  Projecten
+                </p>
+              </div>
+              <div class="stat-card text-center">
+                <div class="stat-num">8</div>
+                <p
+                  class="mt-2 text-xs uppercase tracking-widest font-bold font-display text-muted"
+                >
+                  Technologieën
+                </p>
+              </div>
+              <div class="stat-card text-center">
+                <div class="stat-num">∞</div>
+                <p
+                  class="mt-2 text-xs uppercase tracking-widest font-bold font-display text-muted"
+                >
+                  Leergierigheid
+                </p>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap gap-2 mb-10 gsap-fade">
+              <span class="skill-badge"
+                ><span class="skill-dot"></span>HTML &amp; CSS</span
+              >
+              <span class="skill-badge"
+                ><span class="skill-dot"></span>JavaScript</span
+              >
+              <span class="skill-badge"
+                ><span class="skill-dot"></span>Tailwind CSS</span
+              >
+              <span class="skill-badge"
+                ><span class="skill-dot"></span>React</span
+              >
+              <span class="skill-badge"
+                ><span class="skill-dot"></span>Node.js</span
+              >
+              <span class="skill-badge"
+                ><span class="skill-dot"></span>Express</span
+              >
+              <span class="skill-badge"
+                ><span class="skill-dot"></span>SQL</span
+              >
+              <span class="skill-badge"
+                ><span class="skill-dot"></span>Git &amp; GitHub</span
+              >
+              <span class="skill-badge"
+                ><span class="skill-dot"></span>Figma</span
+              >
+              <span class="skill-badge"
+                ><span class="skill-dot"></span>UI/UX Design</span
+              >
+            </div>
+
+            <div class="timeline-grid gsap-fade">
+              <div>
+                <h3
+                  class="font-display font-bold text-lg mb-4 text-donker-bruin"
+                >
+                  Vaardigheden
+                </h3>
+                <div class="timeline-item">
+                  <span class="timeline-year">Front-end</span>
+                  <div>
+                    <p
+                      class="font-display font-semibold text-sm text-donker-bruin"
+                    >
+                      Web Development
+                    </p>
+                    <p class="text-xs mt-0.5 text-muted">
+                      HTML, CSS, JavaScript, Tailwind, React
+                    </p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <span class="timeline-year">Back-end</span>
+                  <div>
+                    <p
+                      class="font-display font-semibold text-sm text-donker-bruin"
+                    >
+                      Server &amp; Databases
+                    </p>
+                    <p class="text-xs mt-0.5 text-muted">
+                      Node.js, Express, SQL
+                    </p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <span class="timeline-year">Design</span>
+                  <div>
+                    <p
+                      class="font-display font-semibold text-sm text-donker-bruin"
+                    >
+                      UI/UX &amp; Prototyping
+                    </p>
+                    <p class="text-xs mt-0.5 text-muted">Figma, Adobe XD</p>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <h3
+                  class="font-display font-bold text-lg mb-4 text-donker-bruin"
+                >
+                  Opleiding
+                </h3>
+                <div class="timeline-item">
+                  <span class="timeline-year">2023–nu</span>
+                  <div>
+                    <p
+                      class="font-display font-semibold text-sm text-donker-bruin"
+                    >
+                      Graduaat IT &amp; Software
+                    </p>
+                    <p class="text-xs mt-0.5 text-muted">
+                      Thomas More Hogeschool
+                    </p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <span class="timeline-year">2019–23</span>
+                  <div>
+                    <p
+                      class="font-display font-semibold text-sm text-donker-bruin"
+                    >
+                      ASO — Wetenschappen
+                    </p>
+                    <p class="text-xs mt-0.5 text-muted">Secundair onderwijs</p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <span class="timeline-year">2024</span>
+                  <div>
+                    <p
+                      class="font-display font-semibold text-sm text-donker-bruin"
+                    >
+                      Zelfgestuurd leren
+                    </p>
+                    <p class="text-xs mt-0.5 text-muted">
+                      Online cursussen &amp; eigen projecten
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="slide-nav">
+              <div class="slide-dots">
+                <button
+                  class="slide-dot"
+                  data-slide="0"
+                  aria-label="Slide 1"
+                ></button>
+                <button
+                  class="slide-dot active"
+                  data-slide="1"
+                  aria-label="Slide 2"
+                ></button>
+                <button
+                  class="slide-dot"
+                  data-slide="2"
+                  aria-label="Slide 3"
+                ></button>
+              </div>
+              <div class="flex gap-3">
+                <button class="slide-prev" data-target="0">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path
+                      d="M13 8H3M7 4L3 8l4 4"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                  Intro
+                </button>
+                <button class="slide-next" data-target="2">
+                  Persoonlijk
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path
+                      d="M3 8h10M9 4l4 4-4 4"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
           </div>
-          <div
-            class="min-h-30 sm:h-full border border-blue-500 sm:col-span-2 p-4 text-white"
-          >
-            BESCHRIJVING PROJECT
+        </div>
+
+        <!-- ── SLIDE 3: Persoonlijk ── -->
+        <div class="about-slide slide-personal">
+          <div class="blob blob-oranje"></div>
+          <div class="blob blob-grijs"></div>
+
+          <div class="slide-inner">
+            <div class="slide-label gsap-fade">
+              <span class="label-line"></span>
+              <span
+                class="font-display text-xs font-bold tracking-widest uppercase text-oranje"
+                >03 — Persoonlijk tintje</span
+              >
+            </div>
+
+            <div class="personal-content gsap-fade">
+              <div class="personal-emoji w-4/12 hero-logo-wrap">
+                <img
+                  class="w-full h-full hero-logo"
+                  src="/public/logo/logo.svg"
+                  alt=""
+                />
+              </div>
+              <div>
+                <h2
+                  class="font-display font-extrabold about-title text-donker-bruin mb-4"
+                >
+                  Meer dan<br />
+                  <span class="font-serif font-normal italic text-oranje"
+                    >alleen code.</span
+                  >
+                </h2>
+                <div
+                  class="space-y-4 leading-relaxed text-muted max-w-prose mb-10"
+                >
+                  <p>
+                    Naast het coderen ben ik competitief ingesteld — vandaar de
+                    bijnaam
+                    <strong class="text-donker-bruin font-semibold"
+                      >"Competitieve Kookabura"</strong
+                    >. Ik houd van sporten, strategisch denken en mezelf
+                    uitdagen.
+                  </p>
+                  <p>
+                    Die drive neem ik mee naar elk project dat ik aanpak. Of het
+                    nu gaat om een technische uitdaging of een creatief
+                    vraagstuk — ik ga er altijd
+                    <span class="text-donker-bruin font-medium">vol voor</span>.
+                  </p>
+                </div>
+
+                <div
+                  class="personal-card p-6 flex flex-col sm:flex-row items-start sm:items-center gap-6"
+                >
+                  <div>
+                    <p
+                      class="font-display font-bold text-base mb-1 text-donker-bruin"
+                    >
+                      Vind me ook hier
+                    </p>
+                    <p class="text-sm text-muted">
+                      Bekijk mijn werk of maak contact via LinkedIn.
+                    </p>
+                  </div>
+                  <div class="flex gap-3 sm:ml-auto flex-shrink-0">
+                    <a
+                      href="https://github.com/MilanMartens"
+                      target="_blank"
+                      aria-label="GitHub"
+                      class="social-btn"
+                    >
+                      <svg
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M12 0C5.373 0 0 5.373 0 12c0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.298 24 12c0-6.627-5.373-12-12-12z"
+                        />
+                      </svg>
+                    </a>
+                    <a
+                      href="https://www.linkedin.com/in/milan1-martens/"
+                      target="_blank"
+                      aria-label="LinkedIn"
+                      class="social-btn"
+                    >
+                      <svg
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M20.447 20.452H17V14.88c0-1.327-.025-3.037-1.85-3.037-1.853 0-2.136 1.445-2.136 2.939v5.67H9.578V9h3.28v1.561h.046c.456-.862 1.572-1.769 3.234-1.769 3.461 0 4.101 2.278 4.101 5.241l-.003 6.42zM5.337 7.433a1.9 1.9 0 0 1 0-3.8 1.9 1.9 0 0 1 0 3.8zm1.655 13.019H3.682V9h3.31v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+                        />
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="slide-nav">
+              <div class="slide-dots">
+                <button
+                  class="slide-dot"
+                  data-slide="0"
+                  aria-label="Slide 1"
+                ></button>
+                <button
+                  class="slide-dot"
+                  data-slide="1"
+                  aria-label="Slide 2"
+                ></button>
+                <button
+                  class="slide-dot active"
+                  data-slide="2"
+                  aria-label="Slide 3"
+                ></button>
+              </div>
+              <button class="slide-prev" data-target="1">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path
+                    d="M13 8H3M7 4L3 8l4 4"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                Vaardigheden
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <!-- FOOTER -->
-    <footer class="bg-gray-800 text-white py-8">
+      <!-- /about-slider -->
+    </section>
+
+    <!-- ══════════════════════════════════
+       PROJECTEN
+  ══════════════════════════════════ -->
+    <section class="projects-section" id="projects">
+      <div class="section-inner px-6">
+        <div class="flex items-center gap-3 pt-16 mb-16">
+          <span class="label-line label-line-groen"></span>
+          <h2 class="projects-title">Projecten</h2>
+        </div>
+
+        <div class="flex flex-col gap-8">
+          <div class="project-card">
+            <div class="project-img h-48 sm:h-full">
+              <img
+                src="https://picsum.photos/seed/proj1/600/610"
+                alt="Project 1"
+              />
+            </div>
+            <div class="project-desc">
+              <div class="flex flex-wrap gap-2">
+                <span class="project-tag">React</span>
+                <span class="project-tag">Tailwind</span>
+                <span class="project-tag">Node.js</span>
+              </div>
+              <h3>Project Naam</h3>
+              <p>
+                Beschrijving van het project. Wat heb je gebouwd, waarom en
+                welke technologieën heb je gebruikt? Leg kort de uitdagingen en
+                oplossingen uit.
+              </p>
+              <a href="#" class="btn-primary btn-sm">Bekijk project →</a>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-img h-48 sm:h-full order-first sm:order-last">
+              <img
+                src="https://picsum.photos/seed/proj2/600/610"
+                alt="Project 2"
+              />
+            </div>
+            <div class="project-desc order-last sm:order-first">
+              <div class="flex flex-wrap gap-2">
+                <span class="project-tag">JavaScript</span>
+                <span class="project-tag">CSS</span>
+              </div>
+              <h3>Project Naam</h3>
+              <p>
+                Beschrijving van het project. Wat heb je gebouwd, waarom en
+                welke technologieën heb je gebruikt? Leg kort de uitdagingen en
+                oplossingen uit.
+              </p>
+              <a href="#" class="btn-primary btn-sm">Bekijk project →</a>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-img h-48 sm:h-full">
+              <img
+                src="https://picsum.photos/seed/proj3/600/610"
+                alt="Project 3"
+              />
+            </div>
+            <div class="project-desc">
+              <div class="flex flex-wrap gap-2">
+                <span class="project-tag">SQL</span>
+                <span class="project-tag">Express</span>
+                <span class="project-tag">Figma</span>
+              </div>
+              <h3>Project Naam</h3>
+              <p>
+                Beschrijving van het project. Wat heb je gebouwd, waarom en
+                welke technologieën heb je gebruikt? Leg kort de uitdagingen en
+                oplossingen uit.
+              </p>
+              <a href="#" class="btn-primary btn-sm">Bekijk project →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════
+       FOOTER
+  ══════════════════════════════════ -->
+    <footer class="site-footer" id="contact">
       <div
-        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left"
+        class="section-inner px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left"
       >
-        <!-- Links: naam -->
         <div class="flex flex-col justify-center items-center md:items-start">
-          <h2 class="text-xl font-bold">Milan Martens</h2>
-          <p class="text-sm text-gray-300">E-portfolio</p>
+          <h2 class="font-display font-bold text-xl mb-1 text-beige">
+            Milan Martens
+          </h2>
+          <p class="text-sm text-grijs">E-portfolio — Thomas More</p>
         </div>
 
-        <!-- Midden: info + socials -->
-        <div class="flex flex-col justify-center items-center text-center">
-          <p>Student IT & Software</p>
-          <p class="text-gray-300">Thomas More</p>
-          <div class="flex gap-4 mt-2">
+        <div class="flex flex-col justify-center items-center gap-2">
+          <p class="font-display font-semibold text-beige">
+            Student IT &amp; Software
+          </p>
+          <p class="text-sm text-grijs">Thomas More Hogeschool</p>
+          <div class="flex gap-4 mt-1">
             <a
               href="https://github.com/MilanMartens"
-              class="text-gray-300 hover:text-blue-400 transition"
               target="_blank"
+              class="footer-link font-display text-sm font-semibold"
               >GitHub</a
             >
             <a
               href="https://www.linkedin.com/in/milan1-martens/"
-              class="text-gray-300 hover:text-blue-400 transition"
+              target="_blank"
+              class="footer-link font-display text-sm font-semibold"
               >LinkedIn</a
             >
           </div>
         </div>
 
-        <!-- Rechts: copyright -->
-        <div
-          class="flex flex-col justify-center items-center md:items-end text-center md:text-right"
-        >
-          <p class="text-sm text-gray-300">© 2026 Milan Martens</p>
-          <p class="text-xs text-gray-400">All rights reserved</p>
+        <div class="flex flex-col justify-center items-center md:items-end">
+          <p class="text-sm text-grijs">© 2026 Milan Martens</p>
+          <p class="text-xs mt-1 text-grijs-dim">All rights reserved</p>
         </div>
       </div>
     </footer>
 
-    <script type="module" src="./src/main.js"></script>
-    <script
-      defer
-      src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
-    ></script>
+    <script src="/src/main.js"></script>
   </body>
 </html>
