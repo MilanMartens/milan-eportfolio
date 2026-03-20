@@ -128,16 +128,15 @@
                 <div
                   class="space-y-4 mb-8 leading-relaxed text-muted max-w-prose gsap-fade"
                 >
-                  <p>
-                    Ik ben een gepassioneerde student met een sterke interesse
-                    in
-                    <strong class="text-donker-bruin font-semibold"
-                      >front-end ontwikkeling</strong
-                    >
+                      Ik ben een gepassioneerde student met een sterke interesse in
+                    <strong class="text-donker-bruin font-semibold">
+                      back-end development
+                    </strong>
                     en
-                    <strong class="text-donker-bruin font-semibold"
-                      >creatieve technologie</strong
-                    >. Ik combineer technische kennis met een oog voor design.
+                    <strong class="text-donker-bruin font-semibold">
+                      databases
+                    </strong>.
+                    Ik werk graag met data, logica en systemen om efficiënte en betrouwbare applicaties te bouwen.
                   </p>
                   <p>
                     Ik werk graag in teamverband, maar geniet ook van
@@ -234,7 +233,7 @@
                 </p>
               </div>
               <div class="stat-card text-center">
-                <div class="stat-num">8</div>
+                <div class="stat-num skillsNumber"></div>
                 <p
                   class="mt-2 text-xs uppercase tracking-widest font-bold font-display text-muted"
                 >
@@ -251,37 +250,68 @@
               </div>
             </div>
 
-            <div class="flex flex-wrap gap-2 mb-10 gsap-fade">
-              <span class="skill-badge"
-                ><span class="skill-dot"></span>HTML &amp; CSS</span
-              >
-              <span class="skill-badge"
-                ><span class="skill-dot"></span>JavaScript</span
-              >
-              <span class="skill-badge"
-                ><span class="skill-dot"></span>Tailwind CSS</span
-              >
-              <span class="skill-badge"
-                ><span class="skill-dot"></span>React</span
-              >
-              <span class="skill-badge"
-                ><span class="skill-dot"></span>Node.js</span
-              >
-              <span class="skill-badge"
-                ><span class="skill-dot"></span>Express</span
-              >
-              <span class="skill-badge"
-                ><span class="skill-dot"></span>SQL</span
-              >
-              <span class="skill-badge"
-                ><span class="skill-dot"></span>Git &amp; GitHub</span
-              >
-              <span class="skill-badge"
-                ><span class="skill-dot"></span>Figma</span
-              >
-              <span class="skill-badge"
-                ><span class="skill-dot"></span>UI/UX Design</span
-              >
+            <!-- Hoofdcategorie badges -->
+            <div class="flex flex-wrap gap-2 mb-4 gsap-fade" id="skill-categories">
+              <button class="skill-badge skill-category active" data-category="all">
+                <span class="skill-dot"></span>Alles
+              </button>
+              <button class="skill-badge skill-category" data-category="javascript">
+                <span class="skill-dot"></span>JavaScript
+              </button>
+              <button class="skill-badge skill-category" data-category="php">
+                <span class="skill-dot"></span>PHP
+              </button>
+              <button class="skill-badge skill-category" data-category="python">
+                <span class="skill-dot"></span>Python
+              </button>
+              <button class="skill-badge skill-category" data-category="csharp">
+                <span class="skill-dot"></span>C# / .NET
+              </button>
+              <button class="skill-badge skill-category" data-category="java">
+                <span class="skill-dot"></span>Java
+              </button>
+              <button class="skill-badge skill-category" data-category="database">
+                <span class="skill-dot"></span>Database
+              </button>
+              <button class="skill-badge skill-category" data-category="design">
+                <span class="skill-dot"></span>Design
+              </button>
+              <button class="skill-badge skill-category" data-category="overig">
+                <span class="skill-dot"></span>Overig
+              </button>
+            </div>
+
+            <!-- Sub-skill badges -->
+            <div class="flex flex-wrap gap-2 mb-10 gsap-fade" id="skills">
+              <span class="skill-badge skill-sub" data-category="overig"><span class="skill-dot"></span>HTML &amp; CSS</span>
+              <span class="skill-badge skill-sub" data-category="javascript"><span class="skill-dot"></span>Tailwind CSS</span>
+              <span class="skill-badge skill-sub" data-category="javascript"><span class="skill-dot"></span>JavaScript</span>
+              <span class="skill-badge skill-sub" data-category="javascript"><span class="skill-dot"></span>AlpineJs</span>
+              <span class="skill-badge skill-sub" data-category="javascript"><span class="skill-dot"></span>React</span>
+              <span class="skill-badge skill-sub" data-category="php"><span class="skill-dot"></span>Laravel &amp; Livewire</span>
+              <span class="skill-badge skill-sub" data-category="database"><span class="skill-dot"></span>NoSQL</span>
+              <span class="skill-badge skill-sub" data-category="database"><span class="skill-dot"></span>MongoDB</span>
+              <span class="skill-badge skill-sub" data-category="database"><span class="skill-dot"></span>SQL</span>
+              <span class="skill-badge skill-sub" data-category="database"><span class="skill-dot"></span>MySQL</span>
+              <span class="skill-badge skill-sub" data-category="database"><span class="skill-dot"></span>SQLite</span>
+              <span class="skill-badge skill-sub" data-category="overig"><span class="skill-dot"></span>Git &amp; GitHub</span>
+              <span class="skill-badge skill-sub" data-category="python"><span class="skill-dot"></span>Python</span>
+              <span class="skill-badge skill-sub" data-category="python"><span class="skill-dot"></span>FastAPI</span>
+              <span class="skill-badge skill-sub" data-category="python"><span class="skill-dot"></span>Pandas</span>
+              <span class="skill-badge skill-sub" data-category="python"><span class="skill-dot"></span>Numpy</span>
+              <span class="skill-badge skill-sub" data-category="python"><span class="skill-dot"></span>Matplotlib</span>
+              <span class="skill-badge skill-sub" data-category="python"><span class="skill-dot"></span>Beautiful Soup</span>
+              <span class="skill-badge skill-sub" data-category="csharp"><span class="skill-dot"></span>C#</span>
+              <span class="skill-badge skill-sub" data-category="csharp"><span class="skill-dot"></span>.NET</span>
+              <span class="skill-badge skill-sub" data-category="design"><span class="skill-dot"></span>Figma</span>
+              <span class="skill-badge skill-sub" data-category="design"><span class="skill-dot"></span>Adobe Photoshop</span>
+              <span class="skill-badge skill-sub" data-category="overig"><span class="skill-dot"></span>DevOps</span>
+              <span class="skill-badge skill-sub" data-category="overig"><span class="skill-dot"></span>UML &amp; System Design</span>
+              <span class="skill-badge skill-sub" data-category="java"><span class="skill-dot"></span>Java</span>
+              <span class="skill-badge skill-sub" data-category="java"><span class="skill-dot"></span>Spring Boot</span>
+              <span class="skill-badge skill-sub" data-category="java"><span class="skill-dot"></span>Spring JPA</span>
+              <span class="skill-badge skill-sub" data-category="overig"><span class="skill-dot"></span>OO development</span>
+              <span class="skill-badge skill-sub" data-category="overig"><span class="skill-dot"></span>Qlick</span>
             </div>
 
             <div class="timeline-grid gsap-fade">
@@ -336,7 +366,7 @@
                   Opleiding
                 </h3>
                 <div class="timeline-item">
-                  <span class="timeline-year">2023–nu</span>
+                  <span class="timeline-year">2023-nu</span>
                   <div>
                     <p
                       class="font-display font-semibold text-sm text-donker-bruin"

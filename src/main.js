@@ -4,6 +4,42 @@
 const toggle = document.getElementById("navToggle");
 const panel = document.getElementById("navPanel");
 const closeBtn = document.getElementById("navClose");
+const skillsNumber = document.getElementsByClassName("skillsNumber")[0];
+
+document.addEventListener("DOMContentLoaded", () => {
+  const allBadges = document.getElementsByClassName("skill-badge");
+  skillsNumber.innerHTML =
+    allBadges.length - document.getElementsByClassName("skill-category").length;
+
+  const categories = document.querySelectorAll(".skill-category");
+  const subs = document.querySelectorAll(".skill-sub");
+
+  // Begin: toon alles
+  subs.forEach((b) => b.classList.remove("skill-hidden"));
+
+  categories.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      categories.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      const filter = btn.dataset.category;
+
+      subs.forEach((badge) => {
+        const match = filter === "all" || badge.dataset.category === filter;
+
+        badge.classList.remove("skill-show");
+
+        if (match) {
+          badge.classList.remove("skill-hidden");
+          void badge.offsetWidth; // herstart animatie
+          badge.classList.add("skill-show");
+        } else {
+          badge.classList.add("skill-hidden");
+        }
+      });
+    });
+  });
+});
 
 toggle.addEventListener("click", () => panel.classList.add("open"));
 

@@ -869,3 +869,51 @@ body::after {
 .footer-link:hover {
   color: var(--oranje);
 }
+
+/* Actieve categorie badge */
+.skill-category {
+  cursor: pointer;
+  background: none;
+  font-family: inherit;
+}
+
+.skill-category.active {
+  border-color: var(--oranje);
+  background-color: var(--oranje);
+  color: #fff;
+}
+
+.skill-category.active .skill-dot {
+  background-color: #fff;
+}
+
+.skill-category:focus-visible {
+  outline: 2px solid var(--oranje);
+  outline-offset: 2px;
+}
+
+/* Sub-badges verbergen/tonen */
+.skill-sub {
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.skill-sub.skill-hidden {
+  display: none;
+}
+
+@keyframes skillPop {
+  from {
+    opacity: 0;
+    transform: translateY(5px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.skill-sub.skill-show {
+  animation: skillPop 0.22s ease forwards;
+}
