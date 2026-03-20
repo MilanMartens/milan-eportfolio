@@ -1,3 +1,5 @@
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 /* ###################################
    NAVIGATIE
 ################################### */
@@ -75,7 +77,6 @@ panel.querySelectorAll(".nav-link").forEach((link) => {
    GSAP — HORIZONTALE ABOUT SLIDER
 ################################### */
 gsap.registerPlugin(ScrollTrigger);
-
 const slider = document.getElementById("aboutSlider");
 const slides = gsap.utils.toArray(".about-slide");
 const totalSlides = slides.length;
