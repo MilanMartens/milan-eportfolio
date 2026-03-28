@@ -45,7 +45,7 @@ export function initAboutSlider() {
         stagger: 0.08,
         ease: "power2.out",
         clearProps: "transform",
-      }
+      },
     );
   }
 
@@ -85,22 +85,22 @@ export function initAboutSlider() {
     .querySelectorAll(".slide-next")
     .forEach((btn) =>
       btn.addEventListener("click", () =>
-        goToSlide(parseInt(btn.dataset.target))
-      )
+        goToSlide(parseInt(btn.dataset.target)),
+      ),
     );
   document
     .querySelectorAll(".slide-prev")
     .forEach((btn) =>
       btn.addEventListener("click", () =>
-        goToSlide(parseInt(btn.dataset.target))
-      )
+        goToSlide(parseInt(btn.dataset.target)),
+      ),
     );
   document
     .querySelectorAll(".slide-dot")
     .forEach((dot) =>
       dot.addEventListener("click", () =>
-        goToSlide(parseInt(dot.dataset.slide))
-      )
+        goToSlide(parseInt(dot.dataset.slide)),
+      ),
     );
 
   /* ### Swipe ### */
@@ -110,7 +110,7 @@ export function initAboutSlider() {
     (e) => {
       touchStartX = e.touches[0].clientX;
     },
-    { passive: true }
+    { passive: true },
   );
   slider.addEventListener("touchend", (e) => {
     const delta = touchStartX - e.changedTouches[0].clientX;
@@ -121,5 +121,9 @@ export function initAboutSlider() {
   document.addEventListener("keydown", (e) => {
     if (e.key === "ArrowRight") goToSlide(currentSlide + 1);
     if (e.key === "ArrowLeft") goToSlide(currentSlide - 1);
+  });
+
+  window.addEventListener("skillsFiltered", () => {
+    updateSliderHeight(currentSlide);
   });
 }

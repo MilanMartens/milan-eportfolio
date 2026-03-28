@@ -24,12 +24,16 @@ export function initSkills() {
 
         if (match) {
           badge.classList.remove("skill-hidden");
+
           void badge.offsetWidth;
           badge.classList.add("skill-show");
         } else {
           badge.classList.add("skill-hidden");
         }
       });
+
+      // komt uit aboutSlider.js
+      window.dispatchEvent(new CustomEvent("skillsFiltered"));
     });
   });
 }
