@@ -3,10 +3,7 @@
 ################################### */
 
 export function initSkills() {
-  const skillsNumber = document.getElementsByClassName("skillsNumber")[0];
-  const allBadges = document.getElementsByClassName("skill-badge");
-  skillsNumber.innerHTML =
-    allBadges.length - document.getElementsByClassName("skill-category").length;
+  setDataInHtmlFile();
 
   const categories = document.querySelectorAll(".skill-category");
   const subs = document.querySelectorAll(".skill-sub");
@@ -35,6 +32,18 @@ export function initSkills() {
       });
     });
   });
+}
+
+function setDataInHtmlFile() {
+  const skillsNumber = document.getElementsByClassName("skillsNumber")[0];
+  const projectsNumber = document.getElementsByClassName("projectsNumber")[0];
+  const allBadges = document.getElementsByClassName("skill-badge");
+  const projectCategories = document.getElementsByClassName("project-category");
+
+  projectsNumber.innerHTML =
+    projectCategories.length > 10 ? "10+" : projectCategories.length;
+  skillsNumber.innerHTML =
+    allBadges.length - document.getElementsByClassName("skill-category").length;
 }
 
 export function checkMobileFilter() {
