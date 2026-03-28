@@ -16,7 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const categories = document.querySelectorAll(".skill-category");
   const subs = document.querySelectorAll(".skill-sub");
 
-  // Begin: toon alles
   subs.forEach((b) => b.classList.remove("skill-hidden"));
 
   categories.forEach((btn) => {
@@ -33,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (match) {
           badge.classList.remove("skill-hidden");
-          void badge.offsetWidth; // herstart animatie
+          void badge.offsetWidth;
           badge.classList.add("skill-show");
         } else {
           badge.classList.add("skill-hidden");
@@ -41,6 +40,8 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   });
+
+  checkMobileFilter();
 });
 
 toggle.addEventListener("click", () => panel.classList.add("open"));
@@ -73,6 +74,18 @@ panel.querySelectorAll(".nav-link").forEach((link) => {
   });
 });
 
+function checkMobileFilter() {
+  const allBtn = document.querySelector('[data-category="all"]');
+  const jsBtn = document.querySelector('[data-category="javascript"]');
+
+  if (window.innerWidth < 640) {
+    allBtn?.classList.remove("active");
+    jsBtn?.click();
+  } else {
+    allBtn?.click();
+  }
+}
+
 /* ###################################
    GSAP — HORIZONTALE ABOUT SLIDER
 ################################### */
@@ -83,6 +96,17 @@ const totalSlides = slides.length;
 let currentSlide = 0;
 let isAnimating = false;
 
+/* ### Slide 0 animeren bij load ### */
+gsap.delayedCall(0.2, () => {
+  animateSlideIn(slides[0], 0);
+  updateSliderHeight(0);
+});
+
+window.addEventListener("resize", () => {
+  gsap.set(slider, { x: -(currentSlide * window.innerWidth) });
+  updateSliderHeight(currentSlide);
+  checkMobileFilter();
+});
 // Bijhouden welke slides al geanimeerd zijn
 const animated = new Set();
 
@@ -111,8 +135,12 @@ function animateSlideIn(slideEl, index) {
     },
   );
 }
+function updateSliderHeight(index) {
+  const activeSlide = slides[index];
+  gsap.set(slider, { height: activeSlide.offsetHeight });
+  ScrollTrigger.refresh();
+}
 
-/* ### Naar een slide navigeren ### */
 function goToSlide(index) {
   if (isAnimating) return;
   index = Math.max(0, Math.min(index, totalSlides - 1));
@@ -128,6 +156,7 @@ function goToSlide(index) {
     ease: "expo.inOut",
     onComplete: () => {
       isAnimating = false;
+      updateSliderHeight(index);
       const label = slides[index].querySelector(".slide-inner");
       if (label) {
         label.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -136,9 +165,6 @@ function goToSlide(index) {
     },
   });
 }
-
-/* ### Slide 0 animeren bij load ### */
-gsap.delayedCall(0.2, () => animateSlideIn(slides[0], 0));
 
 /* ### Knoppen ### */
 document

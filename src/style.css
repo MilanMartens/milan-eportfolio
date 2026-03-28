@@ -370,6 +370,7 @@ body::after {
   flex-direction: row;
   width: 300vw;
   will-change: transform;
+  overflow: hidden;
 }
 
 .about-slide {
@@ -379,6 +380,9 @@ body::after {
   overflow: hidden;
   display: flex;
   align-items: center;
+  min-width: 100vw;
+  flex-shrink: 0;
+  height: fit-content; /* elke slide bepaalt zijn eigen hoogte */
 }
 
 .gsap-fade {
@@ -917,4 +921,30 @@ body::after {
 
 .skill-sub.skill-show {
   animation: skillPop 0.22s ease forwards;
+}
+
+@media (max-width: 639px) {
+  .stat-card {
+    padding: 0.6rem 0.5rem;
+  }
+
+  .stat-num {
+    font-size: 1.4rem;
+  }
+
+  .stat-card p {
+    font-size: 0.6rem;
+  }
+  .slide-inner {
+    padding: 1rem;
+  }
+  #skill-categories [data-category="all"] {
+    display: none;
+  }
+  .about-slide {
+    display: block;
+  }
+  .slide-intro {
+    max-height: fit-content;
+  }
 }
