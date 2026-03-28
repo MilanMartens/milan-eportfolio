@@ -128,6 +128,10 @@ function goToSlide(index) {
     ease: "expo.inOut",
     onComplete: () => {
       isAnimating = false;
+      const label = slides[index].querySelector(".slide-label");
+      if (label) {
+        label.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
       animateSlideIn(slides[index], index);
     },
   });
