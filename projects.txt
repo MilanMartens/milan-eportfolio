@@ -13,4 +13,5 @@ Jaar 2:
         Data science, Analysis van de Giro d'italia en Giro Donne over de jaren heen = https://github.com/MilanMartens/Datascience-Project 
     Sem 2:
         Skill 2, TALL project Feest op tafel = IN PROGRESS 
+        AI, Crashed een auto binnen 30 dagen of niet =
         
