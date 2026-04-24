@@ -787,6 +787,9 @@ body::after {
   background-color: var(--donkerBruin);
   padding-bottom: 5rem;
 }
+.projects-section .section-inner {
+  max-width: 1400px;
+}
 .projects-title {
   font-family: "Syne", sans-serif;
   font-size: clamp(1.8rem, 4vw, 2.5rem);
@@ -802,7 +805,7 @@ body::after {
 @media (min-width: 640px) {
   .project-card {
     grid-template-columns: 1fr 2fr;
-    height: 30vw;
+    min-height: 30vw;
   }
 }
 .project-img {
@@ -830,7 +833,7 @@ body::after {
   color: var(--beige);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 0.75rem;
 }
 .project-desc h3 {
@@ -844,6 +847,18 @@ body::after {
   opacity: 0.65;
   font-size: 0.95rem;
   line-height: 1.7;
+}
+.project-points {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.project-points p {
+  margin: 0;
+}
+.project-points strong {
+  color: var(--lichtGroen);
+  font-weight: 600;
 }
 .project-tag {
   display: inline-flex;
